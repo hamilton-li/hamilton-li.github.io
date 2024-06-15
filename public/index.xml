@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>李天钰</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on 李天钰</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2024 Copyright :thinking_face:</copyright>
+    <lastBuildDate>Wed, 11 Dec 2019 22:01:38 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 7.7安装Erlang和Elixir</title>
+      <link>http://localhost:1313/posts/install-elixir/</link>
+      <pubDate>Wed, 11 Dec 2019 22:01:38 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/install-elixir/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Erlang是一种开源编程语言，用于构建对高可用性有要求的大规模可扩展的软实时系统。它通常用于电信，银行，电子商务，计算机电话和即时消息中。Erlang的runtime系统具有对并发，分发和容错的内置支持。它是在爱立信计算机科学实验室设计的。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/install-elixir/feature-64a49d1bdebe4b0e88bf09faddf6150d.jpg" />
+    </item>
+    
+    <item>
+      <title>归档</title>
+      <link>http://localhost:1313/archive/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/archive/archive/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

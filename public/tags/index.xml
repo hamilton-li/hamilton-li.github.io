@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>李天钰</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content on 李天钰</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>©2024 Copyright :thinking_face:</copyright>
+    <lastBuildDate>Wed, 11 Dec 2019 22:01:38 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS7</title>
+      <link>http://localhost:1313/tags/centos7/</link>
+      <pubDate>Wed, 11 Dec 2019 22:01:38 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/centos7/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Elixir</title>
+      <link>http://localhost:1313/tags/elixir/</link>
+      <pubDate>Wed, 11 Dec 2019 22:01:38 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/elixir/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Erlang</title>
+      <link>http://localhost:1313/tags/erlang/</link>
+      <pubDate>Wed, 11 Dec 2019 22:01:38 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/erlang/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

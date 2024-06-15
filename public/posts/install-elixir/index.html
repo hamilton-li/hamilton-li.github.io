@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr" class="scroll-smooth" data-default-appearance="light"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="zh-cn" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>CentOS 7.7安装Erlang和Elixir &middot; 李天钰</title>
+  <meta name="title" content="CentOS 7.7安装Erlang和Elixir &middot; 李天钰" />
+  
+  <meta name="description" content="一万年太久，只争朝夕" />
+  <meta name="keywords" content="Erlang, Elixir, CentOS7, " />
+  
+  
+  <link rel="canonical" href="http://localhost:1313/posts/install-elixir/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.ac59a1b8eaafef739c129d12787ac29f6a420bcb348c7aeec8949a8d0b7d6c2023766c169d14b9031b751504eb3c976efe786fec135b340a49868acd8caa4127.css"
+    integrity="sha512-rFmhuOqv73OcEp0SeHrCn2pCC8s0jHruyJSajQt9bCAjdmwWnRS5Axt1FQTrPJdu/nhv7BNbNApJhorNjKpBJw==" />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/js/main.bundle.min.17ffe617e664d257760ee5f71869a6d9328d3613601c03a2eb7a194bbfb06ddc629a70f7b348e6e9446e81d0789555aebce09d27debd0329fc297601a1ee6a77.js"
+    integrity="sha512-F//mF&#43;Zk0ld2DuX3GGmm2TKNNhNgHAOi63oZS7&#43;wbdximnD3s0jm6URugdB4lVWuvOCdJ969Ayn8KXYBoe5qdw==" data-copy="" data-copied=""></script>
+  
+  
+  <script src="/js/zoom.min.js"></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/posts/install-elixir/">
+  <meta property="og:site_name" content="李天钰">
+  <meta property="og:title" content="CentOS 7.7安装Erlang和Elixir">
+  <meta property="og:description" content=" Erlang是一种开源编程语言，用于构建对高可用性有要求的大规模可扩展的软实时系统。它通常用于电信，银行，电子商务，计算机电话和即时消息中。Erlang的runtime系统具有对并发，分发和容错的内置支持。它是在爱立信计算机科学实验室设计的。
+">
+  <meta property="og:locale" content="zh-cn">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-12-11T22:01:38+00:00">
+    <meta property="article:modified_time" content="2019-12-11T22:01:38+00:00">
+    <meta property="article:tag" content="Erlang">
+    <meta property="article:tag" content="Elixir">
+    <meta property="article:tag" content="CentOS7">
+    <meta property="og:image" content="http://localhost:1313/posts/install-elixir/feature-64a49d1bdebe4b0e88bf09faddf6150d.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/posts/install-elixir/feature-64a49d1bdebe4b0e88bf09faddf6150d.jpg"><meta name="twitter:title" content="CentOS 7.7安装Erlang和Elixir">
+<meta name="twitter:description" content="
+Erlang是一种开源编程语言，用于构建对高可用性有要求的大规模可扩展的软实时系统。它通常用于电信，银行，电子商务，计算机电话和即时消息中。Erlang的runtime系统具有对并发，分发和容错的内置支持。它是在爱立信计算机科学实验室设计的。
+">
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "",
+    "name": "CentOS 7.7安装Erlang和Elixir",
+    "headline": "CentOS 7.7安装Erlang和Elixir",
+    
+    "abstract": "\u003cblockquote\u003e\n\u003cp\u003eErlang是一种开源编程语言，用于构建对高可用性有要求的大规模可扩展的软实时系统。它通常用于电信，银行，电子商务，计算机电话和即时消息中。Erlang的runtime系统具有对并发，分发和容错的内置支持。它是在爱立信计算机科学实验室设计的。\u003c\/p\u003e\n\u003c\/blockquote\u003e",
+    "inLanguage": "zh-cn",
+    "url" : "http:\/\/localhost:1313\/posts\/install-elixir\/",
+    "author" : {
+      "@type": "Person",
+      "name": "李天钰"
+    },
+    "copyrightYear": "2019",
+    "dateCreated": "2019-12-11T22:01:38\u002b00:00",
+    "datePublished": "2019-12-11T22:01:38\u002b00:00",
+    
+    "dateModified": "2019-12-11T22:01:38\u002b00:00",
+    
+    "keywords": ["Erlang","Elixir","CentOS7"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "713"
+  }]
+  </script>
+
+
+  
+  
+  <meta name="author" content="李天钰" />
+  
+  
+  
+  <link href="mailto:hamilton.lee@foxmail.com" rel="me" />
+  
+  
+  <link href="https://litianyu.top" rel="me" />
+  
+  
+  <link href="https://github.com/hamilton-li" rel="me" />
+  
+  
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.js" integrity=""></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+  
+  
+  <meta name="theme-color"/>
+  
+  
+</head>
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>跳过正文</a>
+  </div>
+  
+  
+  <div class="min-h-[148px]"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
+  <div id="menu-blur" class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
+  <div class="relative max-w-[64rem] ml-auto mr-auto">
+    <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
+    class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">李天钰</a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        博客
+    </p>
+</a>
+
+
+            
+            
+  <a href="/categories/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        分类
+    </p>
+</a>
+
+
+            
+            
+  <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        标签
+    </p>
+</a>
+
+
+            
+            
+  <a href="/about/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        关于
+    </p>
+</a>
+
+
+            
+            
+  <a href="/links/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        邻居
+    </p>
+</a>
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+            <div
+                class="ltr:mr-14 rtl:ml-14 flex items-center">
+                <button id="appearance-switcher" aria-label="Dark mode switcher" type="button" class="text-base hover:text-primary-600 dark:hover:text-primary-400">
+                    <div class="flex items-center justify-center dark:hidden">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                    </div>
+                    <div class="items-center justify-center hidden dark:flex">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                    </div>
+                </button>
+            </div>
+            
+
+        </nav>
+        <div class="flex md:hidden items-center space-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+            <button id="appearance-switcher-mobile" aria-label="Dark mode switcher" type="button" class="text-base hover:text-primary-600 dark:hover:text-primary-400" style="margin-right:5px">
+                <div class="flex items-center justify-center dark:hidden">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                </div>
+                <div class="items-center justify-center hidden dark:flex">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                </div>
+            </button>
+            
+
+        </div>
+    </div>
+    <div class="-my-2 -mr-2 md:hidden">
+
+        <label id="menu-button" for="menu-controller" class="block">
+            <input type="checkbox" id="menu-controller" class="hidden" />
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;"
+                class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li>
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            博客
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/categories/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            分类
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            标签
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/about/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            关于
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/links/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            邻居
+        </p>
+    </a>
+</li>
+
+
+
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+
+
+  </div>
+</div>
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
+</script>
+
+  
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
+      
+
+
+<article>
+  
+  
+  
+  
+  
+  
+
+
+<div id="hero" class="h-[150px] md:h-[200px]"></div>
+
+
+
+    
+    <div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom"
+    style="background-image:url(/posts/install-elixir/feature-64a49d1bdebe4b0e88bf09faddf6150d_hud8d913bb333fa54a20437b52ab8f35dd_654235_1200x0_resize_q75_box.jpg);">
+    
+
+
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+    </div>
+    <div
+        class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+    </div>
+</div>
+
+<div id="background-blur" class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+
+  
+  
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      CentOS 7.7安装Erlang和Elixir
+    </h1>
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2019-12-11 22:01:38 &#43;0000 UTC">December 11, 2019</time><span class="px-2 text-primary-500">&middot;</span><span>713 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">4 分钟</span><span class="px-2 text-primary-500">&middot;</span>
+
+
+<script type="text/javascript" src="/js/zen-mode.min.ccc8b2a0c4505216444ca25530c7328aa0bef94f43dabaf3e598e1b4271de9eec76c1cb35917471a4f7ccb8d84051b3acef42baa30724ac3a667fcf1fec4432a.js" integrity="sha512-zMiyoMRQUhZETKJVMMcyiqC&#43;&#43;U9D2rrz5ZjhtCcd6e7HbByzWRdHGk98y42EBRs6zvQrqjBySsOmZ/zx/sRDKg=="></script>
+
+<span class="mb-[2px]">
+    <span id="zen-mode-button"
+          class="text-lg hover:text-primary-500"
+          title=""
+          data-title-i18n-disable=""
+          data-title-i18n-enable="">
+        <span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px">
+    <path fill="currentColor" d="M 12.980469 4 C 9.1204688 4 5.9804688 7.14 5.9804688 11 L 6 26 L 9.9804688 26 L 9.9804688 11 C 9.9804688 9.35 11.320469 8 12.980469 8 L 40.019531 8 C 41.679531 8 43.019531 9.35 43.019531 11 L 43.019531 39 C 43.019531 40.65 41.679531 42 40.019531 42 L 29 42 C 29 43.54 28.420938 44.94 27.460938 46 L 40.019531 46 C 43.879531 46 47.019531 42.86 47.019531 39 L 47.019531 11 C 47.019531 7.14 43.879531 4 40.019531 4 L 12.980469 4 z M 7 28 C 4.794 28 3 29.794 3 32 L 3 42 C 3 44.206 4.794 46 7 46 L 23 46 C 25.206 46 27 44.206 27 42 L 27 32 C 27 29.794 25.206 28 23 28 L 7 28 z M 7 32 L 23 32 L 23.001953 42 L 7 42 L 7 32 z"/>
+</svg>
+  </span>
+
+</span>
+    </span>
+</span>
+  
+
+  
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+
+    
+      
+      
+
+      
+
+      
+
+    
+
+  </header>
+  
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    
+     <div
+      class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-[140px]">
+
+         <details open class="toc-right mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    目录
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#erlang">Erlang</a></li>
+    <li><a href="#elixir">Elixir</a></li>
+    <li><a href="#安装前的准备">安装前的准备</a></li>
+    <li><a href="#安装erlang">安装Erlang</a></li>
+    <li><a href="#验证erlang">验证Erlang</a></li>
+    <li><a href="#在erlang中测试示例-hello_world程序">在Erlang中测试示例“ hello_world”程序</a></li>
+    <li><a href="#安装elixir">安装Elixir</a></li>
+    <li><a href="#验证elixir">验证Elixir</a></li>
+    <li><a href="#简便方法">简便方法</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    目录
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#erlang">Erlang</a></li>
+    <li><a href="#elixir">Elixir</a></li>
+    <li><a href="#安装前的准备">安装前的准备</a></li>
+    <li><a href="#安装erlang">安装Erlang</a></li>
+    <li><a href="#验证erlang">验证Erlang</a></li>
+    <li><a href="#在erlang中测试示例-hello_world程序">在Erlang中测试示例“ hello_world”程序</a></li>
+    <li><a href="#安装elixir">安装Elixir</a></li>
+    <li><a href="#验证elixir">验证Elixir</a></li>
+    <li><a href="#简便方法">简便方法</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+ 
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+           
+            $(e).removeClass('active').siblings('ul').hide();
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+         
+          $toc.find('a').parent('li').find('ul').hide();
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+   </div>
+      </div>
+      
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+        
+
+
+        <div class="article-content max-w-prose mb-20">
+          <blockquote>
+<p>Erlang是一种开源编程语言，用于构建对高可用性有要求的大规模可扩展的软实时系统。它通常用于电信，银行，电子商务，计算机电话和即时消息中。Erlang的runtime系统具有对并发，分发和容错的内置支持。它是在爱立信计算机科学实验室设计的。</p>
+</blockquote>
+<p>安装之前，先看一下它们的简要说明</p>
+
+
+<h2 class="relative group">Erlang 
+    <div id="erlang" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#erlang" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Erlang</strong>是一种开源编程语言，用于构建对高可用性有要求的大规模可扩展的软实时系统。它通常用于电信，银行，电子商务，计算机电话和即时消息中。Erlang的runtime系统具有对并发，分发和容错的内置支持。它是在爱立信计算机科学实验室设计的。</p>
+
+
+<h2 class="relative group">Elixir 
+    <div id="elixir" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#elixir" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Elixir</strong>是一种动态的功能语言，旨在用于构建可伸缩和可维护的应用程序。Elixir利用了以运行低延迟，分布式和容错系统而著称的Erlang VM，同时也成功地用于Web开发和嵌入式软件领域。</p>
+<p>现在开始在CentOS 7.7 64位服务器中安装Erlang和Elixir。</p>
+
+
+<h2 class="relative group">安装前的准备 
+    <div id="%E5%AE%89%E8%A3%85%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p>安装Erlang和Elixir之前，需要安装以下依赖。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ yum update
+</span></span><span style="display:flex;"><span>$ yum install epel-release
+</span></span><span style="display:flex;"><span>$ yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git wget wxBase.x86_64
+</span></span></code></pre></div>
+
+<h2 class="relative group">安装Erlang 
+    <div id="%E5%AE%89%E8%A3%85erlang" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E5%AE%89%E8%A3%85erlang" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p>由于官方存储库中的Erlang版本可能比较旧，这里我将下载并安装最新的Erlang版本。</p>
+<p>添加Erlang官方存储库以安装最新的Erlang。</p>
+<p>首先到 <strong><a href="https://packages.erlang-solutions.com/erlang/"   target="_blank">
+    Erlang存储库页面</a></strong>，根据你使用的发行版下载存储库：</p>
+<p>由于现在在CentOS 7.7中安装Erlang，因此我将添加以下存储库。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+</span></span><span style="display:flex;"><span>$ rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+</span></span></code></pre></div><p>使用以下命令更新存储库列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ yum update
+</span></span></code></pre></div><p>使用以下命令安装erlang</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ yum install erlang
+</span></span></code></pre></div><p>现在最新版本的Erlang已安装完成。</p>
+
+
+<h2 class="relative group">验证Erlang 
+    <div id="%E9%AA%8C%E8%AF%81erlang" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E9%AA%8C%E8%AF%81erlang" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p>运行以下命令以验证是否已安装Erlang。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ erl
+</span></span></code></pre></div><p><strong>输出示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Erlang/OTP <span style="color:#ae81ff">22</span> <span style="color:#f92672">[</span>erts-10.6<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>source<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>64-bit<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>smp:1:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>ds:1:1:10<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>async-threads:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>hipe<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Eshell V10.6  <span style="color:#f92672">(</span>abort with ^G<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>1&gt; 
+</span></span></code></pre></div><p>如果看到如上的Erlang shell，表示安装成功！要关闭shell，只需按两次 <strong>Ctrl-C</strong>。</p>
+
+
+<h2 class="relative group">在Erlang中测试示例“ hello_world”程序 
+    <div id="%E5%9C%A8erlang%E4%B8%AD%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B-hello_world%E7%A8%8B%E5%BA%8F" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E5%9C%A8erlang%E4%B8%AD%E6%B5%8B%E8%AF%95%E7%A4%BA%E4%BE%8B-hello_world%E7%A8%8B%E5%BA%8F" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p>创建一个名为“ hello.erl”的新文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ vi hello.erl
+</span></span></code></pre></div><p>添加以下代码：</p>
+<pre tabindex="0"><code>-module(hello).
+-export([hello_world/0]).
+hello_world() -&gt; io:fwrite(&#34;hello, world\n&#34;).
+</code></pre><p><code>:wq</code> 保存并关闭文件。</p>
+<p>使用以下命令打开Erlang shell：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ erl
+</span></span></code></pre></div><p>运行以下命令，切记在每个命令的末尾添加英文点：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ c<span style="color:#f92672">(</span>hello<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>$ hello:hello_world<span style="color:#f92672">()</span>.
+</span></span></code></pre></div><p><strong>输出示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span><span style="color:#75715e"># erl</span>
+</span></span><span style="display:flex;"><span>Erlang/OTP <span style="color:#ae81ff">22</span> <span style="color:#f92672">[</span>erts-10.6<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>source<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>64-bit<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>smp:1:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>ds:1:1:10<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>async-threads:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>hipe<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Eshell V10.6  <span style="color:#f92672">(</span>abort with ^G<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>1&gt; c<span style="color:#f92672">(</span>hello<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>ok,hello<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>2&gt; hello:hello_world<span style="color:#f92672">()</span>.
+</span></span><span style="display:flex;"><span>hello, world
+</span></span><span style="display:flex;"><span>ok
+</span></span><span style="display:flex;"><span>3&gt; 
+</span></span></code></pre></div>
+
+<h2 class="relative group">安装Elixir 
+    <div id="%E5%AE%89%E8%A3%85elixir" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E5%AE%89%E8%A3%85elixir" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p><strong>安装Elixir之前必须要先安装Erlang！</strong></p>
+<p>Elixir在EPEL存储库中可用，但已经过时了。为了安装最新版本，这里使用源码编译安装。</p>
+<p>现在将Elixir从GitHub拉取到本地：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ git clone -b v1.9.4 https://github.com/elixir-lang/elixir.git
+</span></span></code></pre></div><p>上面的命令会将最新版本拉取到当前工作目录中名为 <code>elixir</code>的文件夹中。
+注意：最好指定版本，不然的话你安装完查看版本，可能就是如下所示一样，源码和版本号不匹配</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Erlang/OTP <span style="color:#ae81ff">22</span> <span style="color:#f92672">[</span>erts-10.6<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>source<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>64-bit<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>smp:1:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>ds:1:1:10<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>async-threads:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>hipe<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Elixir 1.10.0-dev <span style="color:#f92672">(</span>ee758f9<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>compiled with Erlang/OTP 22<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>接下来进到 <code>elixir</code> 目录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ cd elixir/
+</span></span></code></pre></div><p>运行以下命令开始编译Elixir：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ make clean test
+</span></span></code></pre></div><p><strong>输出示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost elixir<span style="color:#f92672">]</span><span style="color:#75715e"># make clean test</span>
+</span></span><span style="display:flex;"><span>rm -rf ebin
+</span></span><span style="display:flex;"><span>rm -rf lib/*/ebin
+</span></span><span style="display:flex;"><span>rm -rf lib/elixir/src/elixir_parser.erl
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: 进入目录“/root/elixir”
+</span></span><span style="display:flex;"><span>rm -rf lib/*/_build/
+</span></span><span style="display:flex;"><span>rm -rf lib/*/tmp/
+</span></span><span style="display:flex;"><span>rm -rf lib/elixir/test/ebin/
+</span></span><span style="display:flex;"><span>rm -rf lib/mix/test/fixtures/deps_on_git_repo/
+</span></span><span style="display:flex;"><span>rm -rf lib/mix/test/fixtures/git_rebar/
+</span></span><span style="display:flex;"><span>rm -rf lib/mix/test/fixtures/git_repo/
+</span></span><span style="display:flex;"><span>rm -rf lib/mix/test/fixtures/git_sparse_repo/
+</span></span><span style="display:flex;"><span>rm -f erl_crash.dump
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span>: 进入目录“/root/elixir”
+</span></span><span style="display:flex;"><span>rm -f man/elixir.1
+</span></span><span style="display:flex;"><span>rm -f man/elixir.1.bak
+</span></span><span style="display:flex;"><span>rm -f man/iex.1
+</span></span><span style="display:flex;"><span>rm -f man/iex.1.bak
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>2<span style="color:#f92672">]</span>: 离开目录“/root/elixir”
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: 离开目录“/root/elixir”
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_utils
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_tokenizer
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_sup
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_rewrite
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_quote
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_parser
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_overridable
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_module
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_map
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_locals
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_lexical
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_interpolation
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_import
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_fn
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_expand
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_errors
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl_var
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl_try
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl_pass
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl_for
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl_compiler
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl_clauses
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_erl
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_env
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_dispatch
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_def
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_config
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_compiler
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_code_server
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_clauses
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_bootstrap
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_bitstring
+</span></span><span style="display:flex;"><span>Recompile: src/elixir_aliases
+</span></span><span style="display:flex;"><span>Recompile: src/elixir
+</span></span><span style="display:flex;"><span>Generated elixir app
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; bootstrap <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/macro/env.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/keyword.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/list.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/macro.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel/typespec.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/code.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/code/identifier.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/checker.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/locals_tracker.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/parallel_checker.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/types/helpers.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/types/infer.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/types/expr.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/types/pattern.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/module/types.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel/utils.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/exception.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/protocol.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/stream/reducers.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/enum.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/map.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/inspect/algebra.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/inspect.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/access.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/range.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/regex.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/string.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/string/chars.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/io.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/path.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/file.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/system.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel/cli.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel/error_handler.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel/parallel_compiler.ex
+</span></span><span style="display:flex;"><span>Compiled lib/elixir/lib/kernel/lexical_tracker.ex
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: 进入目录“/root/elixir”
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; unicode <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Compiling /root/elixir/lib/elixir/unicode/unicode.ex <span style="color:#f92672">(</span>it<span style="color:#e6db74">&#39;s taking more than 15s)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">make[1]: 离开目录“/root/elixir”
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">==&gt; elixir (compile)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Compiling /root/elixir/lib/elixir/lib/base.ex (it&#39;</span>s taking more than 15s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: 进入目录“/root/elixir”
+</span></span><span style="display:flex;"><span>Generated elixir app
+</span></span><span style="display:flex;"><span>make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: 离开目录“/root/elixir”
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; eex <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; mix <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Generated mix app
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; ex_unit <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Generated ex_unit app
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; logger <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Generated logger app
+</span></span><span style="display:flex;"><span>Generated eex app
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; iex <span style="color:#f92672">(</span>compile<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Generated iex app
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; elixir <span style="color:#f92672">(</span>eunit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  All <span style="color:#ae81ff">190</span> tests passed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; elixir <span style="color:#f92672">(</span>ex_unit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Finished in 81.6 seconds <span style="color:#f92672">(</span>47.2s on load, 34.4s on tests<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1569</span> doctests, <span style="color:#ae81ff">3374</span> tests, <span style="color:#ae81ff">0</span> failures, <span style="color:#ae81ff">7</span> excluded
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Randomized with seed 847643
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; ex_unit <span style="color:#f92672">(</span>ex_unit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...............................................................................................................................................................................................................................................................................................................................................................
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Finished in 6.2 seconds <span style="color:#f92672">(</span>3.9s on load, 2.3s on tests<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">42</span> doctests, <span style="color:#ae81ff">309</span> tests, <span style="color:#ae81ff">0</span> failures
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Randomized with seed 541463
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; logger <span style="color:#f92672">(</span>ex_unit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>............................................................................................................................
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Finished in 2.4 seconds <span style="color:#f92672">(</span>1.9s on load, 0.4s on tests<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> doctests, <span style="color:#ae81ff">121</span> tests, <span style="color:#ae81ff">0</span> failures
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Randomized with seed 211604
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; mix <span style="color:#f92672">(</span>ex_unit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Excluding tags: <span style="color:#f92672">[</span>windows: true<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Finished in 158.5 seconds <span style="color:#f92672">(</span>12.1s on load, 146.4s on tests<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span> doctests, <span style="color:#ae81ff">611</span> tests, <span style="color:#ae81ff">0</span> failures
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Randomized with seed 334499
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; eex <span style="color:#f92672">(</span>ex_unit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...........................................................................................
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Finished in 0.5 seconds <span style="color:#f92672">(</span>0.4s on load, 0.06s on tests<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> doctests, <span style="color:#ae81ff">86</span> tests, <span style="color:#ae81ff">0</span> failures
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Randomized with seed 599118
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==</span>&gt; iex <span style="color:#f92672">(</span>ex_unit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>.......................................................................................................................................................................................................................................
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Finished in 8.5 seconds <span style="color:#f92672">(</span>2.1s on load, 6.3s on tests<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">231</span> tests, <span style="color:#ae81ff">0</span> failures
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Randomized with seed <span style="color:#ae81ff">207545</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost elixir<span style="color:#f92672">]</span><span style="color:#75715e"># </span>
+</span></span></code></pre></div><p>如果测试通过，则表示编译安装完成。</p>
+<p>接下来将Elixir的bin路径添加到PATH环境变量中，否则Elixir将无法正常工作。</p>
+<p>方法一（暂时生效）
+现在运行以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\$PATH:/root/elixir/bin&#34;</span>
+</span></span></code></pre></div><p>在这里，我把Elixir安装在了 <code>/root/elixir/</code>  。你必须将此路径替换为你实际的Elixir安装路径。</p>
+<p>方法二（只对当前登陆用户生效，永久生效）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ vi <span style="color:#ae81ff">\~</span>/.bash_profile
+</span></span></code></pre></div><p>默认如下：</p>
+<pre tabindex="0"><code>PATH=$PATH:$HOME/bin
+</code></pre><p>添加后：</p>
+<pre tabindex="0"><code>PATH=$PATH:$HOME/bin:$PATH:/root/elixir/bin
+</code></pre><p>接下来执行 <code>source ~/.bash_profile</code> 使其立即生效或者 <code>reboot</code> 重启生效</p>
+<p>方法三（对所有系统用户生效，永久生效）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ vi /etc/profile
+</span></span></code></pre></div><p>在文件最后添加以下两行：</p>
+<pre tabindex="0"><code>PATH=&#34;$PATH:/root/elixir/bin&#34;
+export PATH
+</code></pre><p>接下来执行 <code>source /etc/profile</code> 使其立即生效或者 <code>reboot</code> 重启生效</p>
+
+
+<h2 class="relative group">验证Elixir 
+    <div id="%E9%AA%8C%E8%AF%81elixir" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E9%AA%8C%E8%AF%81elixir" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p>要验证是否已安装Elixir，请运行：</p>
+<pre tabindex="0"><code>$ iex
+</code></pre><p><strong>输出示例：</strong></p>
+<pre tabindex="0"><code>Erlang/OTP 22 [erts-10.6] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:1] [hipe]
+
+Interactive Elixir (1.9.4) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)&gt; 
+</code></pre><p>如果你看到Elixir shell，则表示安装成功！</p>
+<p>同样，要关闭Elixir shell，只需按两次<strong>Ctrl-C</strong>。</p>
+<p>查看Elixir版本：</p>
+<pre tabindex="0"><code>$ elixir --version
+</code></pre><p><strong>输出示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Erlang/OTP <span style="color:#ae81ff">22</span> <span style="color:#f92672">[</span>erts-10.6<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>source<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>64-bit<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>smp:1:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>ds:1:1:10<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>async-threads:1<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>hipe<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Elixir 1.10.0-dev <span style="color:#f92672">(</span>ee758f9<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>compiled with Erlang/OTP 22<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>现在CentOS 7.7服务器中已成功安装并设置可工作的Erlang和Elixir开发环境，所有安装已完成！</p>
+
+
+<h2 class="relative group">简便方法 
+    <div id="%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95" aria-label="锚点">#</a>
+    </span>        
+    
+</h2>
+<p>直接使用<code>yum</code>或者<code>apt</code>来安装，详情查看<a href="https://mirrors.tuna.tsinghua.edu.cn/help/erlang-solutions/"   target="_blank">
+    Erlang Solutions 软件仓库镜像使用帮助</a></p>
+<p><strong>参考链接：</strong></p>
+<ul>
+<li><strong><a href="https://www.unixmen.com"   target="_blank">
+    Unixmen</a></strong></li>
+<li><strong><a href="https://www.erlang.org"   target="_blank">
+    Erlang网站</a></strong></li>
+<li><strong><a href="https://www.erlang.org/docs"   target="_blank">
+    Erlang文档</a></strong></li>
+<li><strong><a href="https://elixir-lang.org"   target="_blank">
+    Elixir网站</a></strong></li>
+<li><strong><a href="https://elixir-lang.org/docs.html"   target="_blank">
+    Elixir文档</a></strong></li>
+<li><strong><a href="https://docs.riak.com/riak/kv/2.2.3/setup/installing/source/erlang/"   target="_blank">
+    安装Erlang</a></strong></li>
+</ul>
+        </div>
+        
+        
+
+        
+        
+
+        
+
+
+  
+      </div>
+     
+      
+      
+        
+        
+          
+          
+        
+      <script>
+        var oid = "views_posts\\install-elixir.md"
+        var oid_likes = "likes_posts\\install-elixir.md"
+      </script>
+      
+      
+      
+      <script type="text/javascript" src="/js/page.min.b06a29d42a4ed16787978e2eee1e8c797b7698db2bc14ccee78f5c80ac566fc996190a73ad80a5e987558474b20b96fa38f7d85b405f165ff72b7b163c5ad11b.js" integrity="sha512-sGop1CpO0WeHl44u7h6MeXt2mNsrwUzO549cgKxWb8mWGQpzrYCl6YdVhHSyC5b6OPfYW0BfFl/3K3sWPFrRGw=="></script>
+  
+    </section>
+  <footer class="pt-8 max-w-prose print:hidden">
+
+    
+  
+
+
+    
+  </footer>
+</article>
+
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="返回顶部" title="返回顶部">
+    &uarr;
+  </a>
+</div>
+    </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+
+    
+    
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      ©2024 Copyright 🤔
+    </p>
+    
+
+    
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+  
+  
+  <script type="text/javascript" src="/js/process.min.62060bb247f4de2b6dde45903668fefb68d792f365587605177b1227c0cf43588701edaca0cb40e2c8e2789bd5ce67c1d2a215b9fb258c3496a7cd25e7cb5fdf.js" integrity="sha512-YgYLskf03itt3kWQNmj&#43;&#43;2jXkvNlWHYFF3sSJ8DPQ1iHAe2soMtA4sjieJvVzmfB0qIVufsljDSWp80l58tf3w=="></script>
+  
+  
+</footer><div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="http://localhost:1313/"
+  style="z-index:500"
+>
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="搜索"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="关闭 (Esc)"
+      >
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+  </div>
+</body>
+
+</html>
